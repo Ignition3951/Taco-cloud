@@ -23,6 +23,7 @@ import tacos.model.TacoOrder;;
 @SessionAttributes("tacoOrder")
 public class DesignTacoController {
 	
+	@ModelAttribute
 	public void addIngredientsToModel(Model model) {
 		List<Ingredient> ingredients = Arrays.asList(
 				 new Ingredient("FLTO", "Flour Tortilla", Type.WRAP),
