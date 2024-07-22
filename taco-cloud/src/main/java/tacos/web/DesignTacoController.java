@@ -70,6 +70,7 @@ public class DesignTacoController {
 		if(errors.hasErrors()) {
 			return "design"; 
 		}
+		log.info("Second commit");
 		tacoOrder.addTaco(taco);
 		return "redirect:/orders/current";
 	}
