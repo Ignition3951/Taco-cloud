@@ -7,3 +7,8 @@ spring:
   data:
     rest:
       base-path: /data-api
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:9001/oauth2/jwks
