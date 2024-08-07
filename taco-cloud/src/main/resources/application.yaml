@@ -9,6 +9,32 @@ spring:
       base-path: /data-api
   security:
     oauth2:
-      resourceserver:
-        jwt:
-          jwk-set-uri: http://localhost:9001/oauth2/jwks
+      client:
+        registration:
+          taco-admin-client:
+            provider: tacocloud
+            client-id: taco-admin-client
+            client-secret: secret
+            authorization-grant-type: authorization_code
+            redirect-uri: "http://localhost:8080/login/oauth2/code/{registrationId}"
+            scope: writeIngredients,deleteIngredients,openid
+            client-name: taco-admin-client
+          taco-admin-client-authorization-code:
+            provider: tacocloud
+            client-id: taco-admin-client
+            client-secret: secret
+            authorization-grant-type: authorization_code
+            redirect-uri: "http://localhost:8080/authorized"
+            scope: writeIngredients,deleteIngredients,openid
+            client-name: taco-admin-client-authorization-code
+        provider:
+          tacocloud:
+            issuer-uri: "http://authserver:9001"
+debug: true
+#            authorization-uri: http://authserver:9001/oauth2/authorize
+#            token-uri: http://authserver:9001/oauth2/token
+#            jwk-set-uri: http://authserver:9001/oauth2/jwks
+#            user-info-uri: http://authserver:9001/userinfo
+#            user-name-attribute: sub
+server:
+  port: 8081
