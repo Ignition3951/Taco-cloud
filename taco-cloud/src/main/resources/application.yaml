@@ -7,3 +7,8 @@ spring:
   data:
     rest:
       base-path: /data-api
+  jms:
+    template:
+      default-destination: tacocloud.order.queue
+server:
+  port: 8081
