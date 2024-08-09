@@ -16,6 +16,7 @@ import tacos.data.OrderRepository;
 import tacos.model.TacoOrder;
 import tacos.model.User;
 import tacos.service.OrderMessagingService;
+import tacos.service.OrderReceiver;
 
 @Slf4j
 @Controller
@@ -27,6 +28,9 @@ public class OrderController {
 	
 	@Autowired
 	private OrderMessagingService messagingService;
+
+	@Autowired
+	private OrderReceiver orderReceiver;
 
 	public OrderController(OrderRepository orderRepository) {
 		this.orderRepository=orderRepository;
@@ -48,6 +52,12 @@ public class OrderController {
 		messagingService.converAndSend(tacoOrder);
 		orderRepository.save(tacoOrder);
 		sessionStatus.setComplete();
+		return "redirect:/";
+	}
+
+	@GetMapping("/receive")
+	public String recieveOrder() {
+		System.out.println("Received order is :" + orderReceiver.receiveOrder());
 		return "redirect:/";
 	}
 
